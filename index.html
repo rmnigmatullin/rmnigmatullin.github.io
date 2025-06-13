@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Film Bureau</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="screen active">
+        <div class="container">
+            <h1>Hi! Welcome to Lost & Found Film Bureau</h1>
+            <h2>What are you looking for today?</h2>
+            
+            <form id="search-form" class="search-form">
+                <div class="form-group">
+                    <label for="film-title">Film Title</label>
+                    <div class="autocomplete-container">
+                        <input type="text" id="film-title" name="filmTitle" placeholder="Enter the title of the film" required autocomplete="off">
+                        <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location" required>
+                        <option value="">Select your location</option>
+                        <option value="United States" selected>United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="India">India</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Finland">Finland</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Russia">Russia</option>
+                        <option value="China">China</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Chile">Chile</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Results Page -->
+    <div id="search-results" class="screen">
+        <div class="container">
+            <h1>Search Results</h1>
+            <div id="results-header"></div>
+
+            <div id="results-content"></div>
+            <div id="no-results" class="no-results hidden">
+                <h2>No films found</h2>
+                <p>Try checking your spelling or entering a different title.</p>
+            </div>
+            <button id="back-to-search" class="btn-secondary">Back to Search</button>
+        </div>
+    </div>
+
+    <!-- Result Available Page -->
+    <div id="result-available" class="screen">
+        <div class="container">
+            <div id="movie-card-available" class="movie-card"></div>
+            <div id="availability-section" class="availability-section">
+                <div id="availability-loading" class="loading-state">Checking availability…</div>
+                <div id="availability-content"></div>
+            </div>
+            <button id="back-to-results-available" class="btn-secondary">Back to Results</button>
+        </div>
+    </div>
+
+    <!-- Result Unavailable Page -->
+    <div id="result-unavailable" class="screen">
+        <div class="container">
+            <div id="movie-card-unavailable" class="movie-card"></div>
+            <div id="unavailable-section" class="unavailable-section">
+                <h2 id="unavailable-header"></h2>
+                <div class="action-section">
+                    <p>Want to watch it anyway?</p>
+                </div>
+            </div>
+            <button id="request-microscreening" class="btn-primary">Proceed to request a film</button>
+            <button id="back-to-results-unavailable" class="btn-secondary">Back to Results</button>
+        </div>
+    </div>
+
+    <!-- Microscreening Form Page -->
+    <div id="microscreening-form" class="screen">
+        <div class="container">
+            <h1 id="microscreening-header"></h1>
+            
+            <form id="screening-form" class="screening-form">
+                <div class="form-group">
+                    <label for="screening-date">Preferred screening date</label>
+                    <input type="date" id="screening-date" name="screeningDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Number of attendees</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="attendees" value="1-5" required>
+                            <span>1–5</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attendees" value="6-10" required>
+                            <span>6–10</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attendees" value="More than 10" required>
+                            <span>More than 10</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location-type">Location type</label>
+                    <select id="location-type" name="locationType" required>
+                        <option value="">Select location type</option>
+                        <option value="Backyard">Backyard</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Library">Library</option>
+                        <option value="Café">Café</option>
+                        <option value="Community Center">Community Center</option>
+                        <option value="Rooftop">Rooftop</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Your email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="digitalKit" id="digital-kit">
+                        <span>Yes, I'd like to receive the digital microscreening kit with my movie link once approved.</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="newsletter" id="newsletter">
+                        <span>Sign me up for a curated newsletter based on this film.</span>
+                    </label>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn-primary" id="submit-request">Submit Request</button>
+                    <button type="button" class="btn-secondary" id="cancel-request">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Page -->
+    <div id="confirmation" class="screen">
+        <div class="container">
+            <h1>You're all set!</h1>
+            <h2 id="confirmation-header"></h2>
+            
+            <div class="what-happens-next">
+                <h3>What happens next:</h3>
+                <ul>
+                    <li>You'll get a confirmation email within 24 hours.</li>
+                    <li>If approved, your movie link (and microscreening kit, if requested) will be sent 48 hours before your screening date.</li>
+                    <li>It's a one-time access link — no need to rush, but plan accordingly.</li>
+                    <li>You might also receive curated film picks in your inbox based on your request.</li>
+                </ul>
+            </div>
+            
+            <div id="request-summary" class="request-summary">
+                <h3>Request Summary:</h3>
+                <div id="summary-content"></div>
+            </div>
+            
+            <button id="search-another" class="btn-primary">Search Another Film</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

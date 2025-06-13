@@ -1,0 +1,151 @@
+LOST & FOUND FILM BUREAU - UI TEXT CONTENT
+This document contains all user-facing text content across all screens of the application.
+[GLOBAL LAYOUT NOTE] - All page-level headlines should be center-aligned.
+============================================= 1. LANDING PAGE (/) =============================================
+HEADERS: - Hi! Welcome to Lost & Found Film Bureau - What are you looking for today?
+FORM LABELS & PLACEHOLDERS: - Film Title - Enter the title of the film - Location - Select your location
+LOCATION DROPDOWN OPTIONS: - United States - United Kingdom - Canada - Australia - Germany - France - Netherlands - Japan - Brazil - India - Mexico - Spain - Italy - Sweden - Norway - Denmark - Belgium - Switzerland - Austria - Finland - Poland - Russia - China - South Korea - Thailand - Singapore - New Zealand - South Africa - Argentina - Chile
+BUTTONS: - Search
+============================================= 2. SEARCH RESULTS PAGE (/search-results) =============================================
+HEADERS: - Search Results - Found [X] film(s) matching “[search term]” - No films found matching “[search term]”
+LOADING STATES: - Searching for “[search term]”… - Checking our film database
+NO RESULTS MESSAGE: - No films found - Try checking your spelling or entering a different title.
+MOVIE INFORMATION DISPLAYED: - [Movie Title] - [Year]
+BUTTONS: - Back to Search
+ERROR MESSAGES: - Failed to load movies. Please try again.
+============================================= 3. RESULT AVAILABLE PAGE (/result-available/:movieId) =============================================
+MOVIE CARD: - Poster image (7x10 format) - [Movie Title] - [Logline]
+AVAILABILITY SECTION: - Available for streaming in [Country Name] - Available on: - [Platform Name] (clickable links)
+LOADING STATES: - Checking availability…
+BUTTONS: - Back to Results
+ERROR MESSAGES: - Failed to load movie information. Please try again.
+============================================= 4. RESULT UNAVAILABLE PAGE (/result-unavailable) =============================================
+MOVIE CARD: - Poster image (7x10 format) - [Movie Title] - [Logline]
+HEADERS: - Not currently available for streaming in [Country Name]
+ACTION SECTION: - Want to watch it anyway? - Proceed to request a film
+BUTTONS: - Back to Results
+ERROR MESSAGES: - Failed to load movie information. Please try again.
+============================================= 5. MICROSCREENING FORM PAGE (/microscreening-form) =============================================
+HEADERS: - Fill in your info to request [Movie Title]
+FORM FIELDS: - Preferred screening date (date picker) - Number of attendees (radio buttons): - 1–5 - 6–10 - More than 10 - Location type (dropdown): - Backyard - Apartment - Library - Café - Community Center - Rooftop - Other - Your email
+CHECKBOX OPTIONS: - Yes, I’d like to receive the digital microscreening kit with my movie link once approved. - Sign me up for a curated newsletter based on this film.
+BUTTONS: - Submit Request - Submitting… (loading state) - Cancel
+ERROR MESSAGES: - Failed to submit request. Please try again.
+============================================= 6. CONFIRMATION PAGE (/confirmation) =============================================
+HEADERS: - You’re all set! - Your request for [Movie Title] has been received.
+WHAT HAPPENS NEXT: - You’ll get a confirmation email within 24 hours. - If approved, your movie link (and microscreening kit, if requested) will be sent 48 hours before your screening date. - It’s a one-time access link — no need to rush, but plan accordingly. - You might also receive curated film picks in your inbox based on your request.
+REQUEST SUMMARY: - Movie: [Movie Title] ([Year]) - Screening Date: [Formatted Date] - Attendees: [Selected Range] - Location Type: [Chosen Type] - Email: [User Email]
+BUTTONS: - Search Another Film
+============================================= 7. DEMO MOVIE DATABASE =============================================
+The application includes a demo database with the following films:
+Ghostbusters (1984)
+Logline: A team of eccentric parapsychologists start a ghost-catching business in New York City, facing a supernatural threat that could bring about the apocalypse.
+Available on: HBO Max, Amazon Prime Video, Apple TV, Google Play, Vudu
+The Sure Thing (1985)
+Logline: A college freshman embarks on a cross-country road trip with a classmate, navigating comedic mishaps and romantic tension while pursuing a guaranteed hookup in California.
+Not available on major platforms
+============================================= 8. STREAMING PLATFORMS =============================================
+The application references the following streaming platforms: - Netflix - HBO Max - Amazon Prime Video - Disney+ - Hulu - Apple TV - Paramount+ - Peacock - Google Play - Vudu - YouTube
+============================================= END OF UI CONTENT =============================================
+
+
+---
+
+LOST & FOUND FILM BUREAU – UI DESIGN GUIDE
+
+Applies to every screen. No exceptions.
+
+---
+
+VISUAL STYLE
+
+* Background: solid black #000000 — used on every screen
+* Font: one single custom font (to be provided); no system fallbacks or font mixing
+* Text color: pure white #FFFFFF
+* Button hover color: soft gray #AAAAAA
+* No gradients, shadows, strokes, or decorative visuals
+* No frames or outlines on any UI elements, including buttons and fields
+* Overall look: minimal, quiet, and polished, in the spirit of Apple
+
+---
+
+LAYOUT & SPACING
+
+* Primary content (headlines, forms, search, results, buttons) is center-aligned on most screens
+* Use left-alignment only when it improves usability (e.g., form labels, result lists)
+* Avoid sidebars or multi-column layouts — keep everything balanced and open
+* Vertical spacing should follow a strict modular rhythm (e.g., 24px, 32px)
+* Every element should have enough breathing room
+* The design must be legible and elegant when presented on a 16:9 screen
+* Use consistent spacing units throughout (e.g., 8px/16px/32px)
+
+---
+
+UI COMPONENTS
+
+Buttons:
+
+* Text-based with rounded corners, no frames or outlines
+* Default: white text on black background
+* Hover: soft transition to light gray text or fill
+* Cursor: pointer on hover
+* On click: subtle Apple-style scale-down feedback (see Interactions)
+* No shadows, borders, or background strokes
+* Large enough for easy interaction and visibility
+
+Form Fields & Dropdowns:
+
+* Rounded corners only, no outlines or underlines
+* Text: white or light gray on black
+* Layout: centered where possible, labels can be left-aligned
+* On focus: optional subtle glow or brightness change (no lines or borders)
+
+Movie Cards:
+
+* Poster format: 7x10, centered
+* Rounded image corners
+* No visible card borders
+* Clear spacing between poster, title, and logline
+* Visual hierarchy controlled by spacing and type only
+
+---
+
+INTERACTIONS
+
+* All hover and focus effects should be soft and quick (\~200ms transitions)
+* Loading states: subtle animated ellipsis or pulsing dot
+* Keyboard navigation: fully supported (Tab to move, Enter to submit)
+* Cursor states: pointer on interactive items, text on inputs
+* Tap/click feedback (Apple-style):
+
+  * Buttons scale down slightly on press (`transform: scale(0.97)`)
+  * Creates a physical, responsive feel
+  * Easy to implement with a few lines of CSS
+
+---
+
+COPY & MICROCOPY
+
+* Tone: clear, concise, friendly
+* Error messages: casual but helpful (“Oops, something went wrong. Try again.”)
+* No robotic, overly technical, or generic language
+* No emojis, no icons in text
+
+---
+
+ACCESSIBILITY & CONTRAST
+
+* All elements must pass WCAG contrast standards
+* All text and interface items must be clearly readable at a distance
+* Full keyboard and screen-reader accessibility required
+
+---
+
+CONSISTENCY & RESTRAINT
+
+* One font only — no type variation outside defined use
+* No alternate visual styles or decorative “moments”
+* No icons, shadows, or noise
+* All components (buttons, fields, cards) are built from the same base principles
+* Rounded shapes only — no sharp corners or visual frames
+* Everything must feel intentional, clean, and part of a single, unified product
