@@ -19,8 +19,8 @@ const movieDatabase = {
         id: 'ghostbusters',
         title: 'Ghostbusters',
         year: 1984,
-        logline: 'A team of eccentric parapsychologists start a ghost-catching business in New York City, facing a supernatural threat that could bring about the apocalypse.',
-        poster: 'images/ghostbusters-1984.jpg',
+        logline: 'A team of eccentric parapsychologists start<br>a ghost-catching business in New York City, facing<br>a supernatural threat that could bring about the apocalypse.',
+        poster: 'images/1.jpg',
         available: true,
         platforms: ['HBO Max', 'Amazon Prime Video', 'Apple TV', 'Google Play', 'Vudu']
     },
@@ -28,8 +28,8 @@ const movieDatabase = {
         id: 'the-sure-thing',
         title: 'The Sure Thing',
         year: 1985,
-        logline: 'A college freshman embarks on a cross-country road trip with a classmate, navigating comedic mishaps and romantic tension while pursuing a guaranteed hookup in California.',
-        poster: 'images/the-sure-thing-1985.jpg',
+        logline: 'A college freshman embarks on a cross-country road trip with a classmate, navigating comedic mishaps and romantic tension while pursuing<br>a guaranteed hookup in California.',
+        poster: 'images/2.jpg',
         available: false,
         platforms: []
     }
@@ -46,6 +46,22 @@ let currentState = {
 // Autocomplete state
 let highlightedIndex = -1;
 let autocompleteResults = [];
+
+// Platform icon mapping
+function getPlatformIcon(platform) {
+    const iconFiles = {
+        'HBO Max': 'icons/hbo.png',
+        'Amazon Prime Video': 'icons/amazon-prime-logo-512.webp',
+        'Apple TV': 'icons/appletv.png',
+        'Google Play': 'icons/google-play-store-logo-main-icon-1.png',
+        'Vudu': 'icons/vudu.png'
+    };
+    
+    if (iconFiles[platform]) {
+        return `<img src="${iconFiles[platform]}" alt="${platform}" class="platform-icon-img">`;
+    }
+    return platform; // Fallback to text for platforms without icons
+}
 
 // Screen management
 function showScreen(screenId) {
@@ -202,28 +218,28 @@ function showResultAvailable(movie) {
     const availabilityContent = document.getElementById('availability-content');
     const availabilityLoading = document.getElementById('availability-loading');
     
-    // Display movie card
-    movieCard.innerHTML = createMovieCard(movie);
-    
-    // Show loading initially
-    availabilityLoading.style.display = 'block';
+    // Hide loading elements
+    availabilityLoading.style.display = 'none';
     availabilityContent.style.display = 'none';
     
-    // Simulate loading delay
-    setTimeout(() => {
-        availabilityLoading.style.display = 'none';
-        availabilityContent.style.display = 'block';
-        
-        const platformsHtml = movie.platforms.map(platform => 
-            `<a href="${streamingPlatforms[platform] || '#'}" target="_blank" rel="noopener noreferrer" class="platform-link">${platform}</a>`
-        ).join('');
-        
-        availabilityContent.innerHTML = `
-            <div class="availability-header">Available for streaming in ${currentState.selectedLocation}</div>
-            <p>Available on:</p>
-            <div class="streaming-platforms">${platformsHtml}</div>
-        `;
-    }, 1500);
+    // Create platform links with icons
+    const platformsHtml = movie.platforms.map(platform => 
+        `<a href="${streamingPlatforms[platform] || '#'}" target="_blank" rel="noopener noreferrer" class="platform-icon" title="${platform}">${getPlatformIcon(platform)}</a>`
+    ).join('');
+    
+    // Display movie card with availability info
+    movieCard.innerHTML = `
+        <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+        <div class="movie-info">
+            <div class="movie-title">${movie.title}</div>
+            <div class="movie-year">${movie.year}</div>
+            <div class="movie-logline">${movie.logline}</div>
+                         <div class="available-text">
+                 <p>Available for streaming<br>in ${currentState.selectedLocation}</p>
+                 <div class="streaming-platforms">${platformsHtml}</div>
+             </div>
+        </div>
+    `;
     
     showScreen('result-available');
 }
@@ -233,11 +249,21 @@ function showResultUnavailable(movie) {
     const movieCard = document.getElementById('movie-card-unavailable');
     const unavailableHeader = document.getElementById('unavailable-header');
     
-    // Display movie card
-    movieCard.innerHTML = createMovieCard(movie);
+    // Display movie card with unavailable text
+    movieCard.innerHTML = `
+        <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+        <div class="movie-info">
+            <div class="movie-title">${movie.title}</div>
+            <div class="movie-year">${movie.year}</div>
+            <div class="movie-logline">${movie.logline}</div>
+            <div class="unavailable-text">
+                <p>Not currently available<br>for streaming in ${currentState.selectedLocation}.<br>Want to watch it anyway?</p>
+            </div>
+        </div>
+    `;
     
-    // Set unavailable header
-    unavailableHeader.textContent = `Not currently available for streaming in ${currentState.selectedLocation}`;
+    // Clear the separate unavailable header since it's now in the card
+    unavailableHeader.innerHTML = '';
     
     showScreen('result-unavailable');
 }
@@ -246,16 +272,18 @@ function showResultUnavailable(movie) {
 function createMovieCard(movie) {
     return `
         <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
-        <div class="movie-title">${movie.title}</div>
-        <div class="movie-year">${movie.year}</div>
-        <div class="movie-logline">${movie.logline}</div>
+        <div class="movie-info">
+            <div class="movie-title">${movie.title}</div>
+            <div class="movie-year">${movie.year}</div>
+            <div class="movie-logline">${movie.logline}</div>
+        </div>
     `;
 }
 
 // Show microscreening form
 function showMicroscreeningForm() {
     const header = document.getElementById('microscreening-header');
-    header.textContent = `Fill in your info to request ${currentState.selectedMovie.title}`;
+    header.innerHTML = `Fill in your info to request<br>${currentState.selectedMovie.title}`;
     showScreen('microscreening-form');
 }
 
@@ -265,7 +293,7 @@ function handleMicroscreeningSubmission(formData) {
     
     // Show confirmation
     const confirmationHeader = document.getElementById('confirmation-header');
-    confirmationHeader.textContent = `Your request for ${currentState.selectedMovie.title} has been received.`;
+    confirmationHeader.innerHTML = `Your request for ${currentState.selectedMovie.title}<br>has been received.`;
     
     // Display summary
     const summaryContent = document.getElementById('summary-content');
@@ -281,26 +309,11 @@ function handleMicroscreeningSubmission(formData) {
     });
     
     summaryContent.innerHTML = `
-        <div class="summary-item">
-            <span class="summary-label">Movie:</span>
-            <span class="summary-value">${currentState.selectedMovie.title} (${currentState.selectedMovie.year})</span>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Screening Date:</span>
-            <span class="summary-value">${formattedDate}</span>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Attendees:</span>
-            <span class="summary-value">${attendeesValue}</span>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Location Type:</span>
-            <span class="summary-value">${locationTypeValue}</span>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Email:</span>
-            <span class="summary-value">${formData.get('email')}</span>
-        </div>
+        <p>Movie: ${currentState.selectedMovie.title} (${currentState.selectedMovie.year})</p>
+        <p>Screening Date: ${formattedDate}</p>
+        <p>Attendees: ${attendeesValue}</p>
+        <p>Location Type: ${locationTypeValue}</p>
+        <p>Email: ${formData.get('email')}</p>
     `;
     
     showScreen('confirmation');
@@ -436,6 +449,17 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         showScreen('landing-page');
+    });
+    
+    // Download guidebook button
+    document.getElementById('download-guidebook').addEventListener('click', function() {
+        // Create a temporary link to download the PDF
+        const link = document.createElement('a');
+        link.href = 'WATCHING_TOGETHER.pdf';
+        link.download = 'WATCHING_TOGETHER.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
     
     // Set minimum date for screening date picker (tomorrow)

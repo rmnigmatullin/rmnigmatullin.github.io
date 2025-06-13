@@ -10,7 +10,7 @@
     <!-- Landing Page -->
     <div id="landing-page" class="screen active">
         <div class="container">
-            <h1>Hi! Welcome to Lost & Found Film Bureau</h1>
+            <h1>Hi! Welcome to<br>Lost & Found Film Bureau</h1>
             <h2>What are you looking for today?</h2>
             
             <form id="search-form" class="search-form">
@@ -26,7 +26,7 @@
                     <label for="location">Location</label>
                     <select id="location" name="location" required>
                         <option value="">Select your location</option>
-                        <option value="United States" selected>United States</option>
+                        <option value="United States">United States</option>
                         <option value="United Kingdom">United Kingdom</option>
                         <option value="Canada">Canada</option>
                         <option value="Australia">Australia</option>
@@ -75,7 +75,7 @@
                 <h2>No films found</h2>
                 <p>Try checking your spelling or entering a different title.</p>
             </div>
-            <button id="back-to-search" class="btn-secondary">Back to Search</button>
+            <button id="back-to-search" class="btn-primary">Back to Search</button>
         </div>
     </div>
 
@@ -87,7 +87,7 @@
                 <div id="availability-loading" class="loading-state">Checking availability…</div>
                 <div id="availability-content"></div>
             </div>
-            <button id="back-to-results-available" class="btn-secondary">Back to Results</button>
+            <button id="back-to-results-available" class="btn-primary">Back to Results</button>
         </div>
     </div>
 
@@ -101,8 +101,10 @@
                     <p>Want to watch it anyway?</p>
                 </div>
             </div>
-            <button id="request-microscreening" class="btn-primary">Proceed to request a film</button>
-            <button id="back-to-results-unavailable" class="btn-secondary">Back to Results</button>
+            <div class="unavailable-buttons">
+                <button id="request-microscreening" class="btn-primary">Proceed to request a film</button>
+                <button id="back-to-results-unavailable" class="btn-primary">Back to Results</button>
+            </div>
         </div>
     </div>
 
@@ -167,7 +169,7 @@
                 
                 <div class="form-buttons">
                     <button type="submit" class="btn-primary" id="submit-request">Submit Request</button>
-                    <button type="button" class="btn-secondary" id="cancel-request">Cancel</button>
+                    <button type="button" class="btn-primary" id="cancel-request">Cancel</button>
                 </div>
             </form>
         </div>
@@ -179,22 +181,22 @@
             <h1>You're all set!</h1>
             <h2 id="confirmation-header"></h2>
             
-            <div class="what-happens-next">
-                <h3>What happens next:</h3>
-                <ul>
-                    <li>You'll get a confirmation email within 24 hours.</li>
-                    <li>If approved, your movie link (and microscreening kit, if requested) will be sent 48 hours before your screening date.</li>
-                    <li>It's a one-time access link — no need to rush, but plan accordingly.</li>
-                    <li>You might also receive curated film picks in your inbox based on your request.</li>
-                </ul>
-            </div>
-            
             <div id="request-summary" class="request-summary">
                 <h3>Request Summary:</h3>
                 <div id="summary-content"></div>
             </div>
             
-            <button id="search-another" class="btn-primary">Search Another Film</button>
+            <div class="what-happens-next">
+                <h3>What happens next:</h3>
+                <ul>
+                    <li>You'll get a confirmation email within 24 hours.<br>If approved, your encrypted one-time link (and microscreening<br>kit, if requested) will be sent shortly before your screening date.</li>
+                </ul>
+            </div>
+            
+            <div class="confirmation-buttons">
+                <button id="search-another" class="btn-primary">Search Another Film</button>
+                <button id="download-guidebook" class="btn-primary">Download our guidebook (PDF)</button>
+            </div>
         </div>
     </div>
 

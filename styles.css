@@ -81,6 +81,11 @@ p {
     margin: 0 auto;
 }
 
+.search-form .btn-primary {
+    display: block;
+    margin: 32px auto 8px auto;
+}
+
 .form-group {
     margin-bottom: 32px;
 }
@@ -100,11 +105,18 @@ select {
     padding: 16px 20px;
     font-size: 18px;
     font-family: inherit;
-    background-color: #000000;
+    background-color: #101010;
     color: #FFFFFF;
-    border: 2px solid #333333;
+    border: none;
     border-radius: 12px;
     transition: all 0.2s ease;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
 }
 
 input[type="text"]:focus,
@@ -112,8 +124,7 @@ input[type="email"]:focus,
 input[type="date"]:focus,
 select:focus {
     outline: none;
-    border-color: #666666;
-    background-color: #111111;
+    background-color: #151515;
 }
 
 input::placeholder {
@@ -249,12 +260,13 @@ input[type="checkbox"] {
 
 /* Buttons */
 .btn-primary,
-.btn-secondary {
+.btn-secondary,
+button {
     padding: 16px 32px;
     font-size: 18px;
     font-family: inherit;
     border: none;
-    border-radius: 12px;
+    border-radius: 50px !important;
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-block;
@@ -276,6 +288,21 @@ input[type="checkbox"] {
 
 .btn-primary:active {
     transform: scale(0.97);
+}
+
+/* Back to Results buttons with gray background */
+#back-to-results-available,
+#back-to-search,
+#back-to-results-unavailable {
+    background-color: #101010 !important;
+    color: #FFFFFF !important;
+}
+
+#back-to-results-available:hover,
+#back-to-search:hover,
+#back-to-results-unavailable:hover {
+    background-color: #888888 !important;
+    color: #FFFFFF !important;
 }
 
 .btn-secondary {
@@ -302,7 +329,9 @@ input[type="checkbox"] {
 
 /* Movie Cards */
 .movie-card {
-    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
     margin-bottom: 32px;
 }
 
@@ -311,13 +340,18 @@ input[type="checkbox"] {
     height: 400px;
     object-fit: cover;
     border-radius: 12px;
-    margin-bottom: 24px;
+    flex-shrink: 0;
+}
+
+.movie-info {
+    flex: 1;
+    text-align: left;
 }
 
 .movie-title {
     font-size: 32px;
     font-weight: normal;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .movie-year {
@@ -329,21 +363,86 @@ input[type="checkbox"] {
 .movie-logline {
     font-size: 18px;
     line-height: 1.5;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: none;
+    margin-bottom: 24px;
+}
+
+.unavailable-text {
+    margin-top: 24px;
+    margin-left: 0;
+    background-color: #111111;
+    padding: 20px;
+    border-radius: 16px;
+    align-self: flex-start;
+}
+
+.unavailable-text p {
+    font-size: 24px;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+/* Available text block (smaller and left-aligned) */
+.available-text {
+    margin-top: 24px;
+    margin-left: 0;
+    background-color: #111111;
+    padding: 16px;
+    border-radius: 12px;
+    align-self: flex-start;
+    text-align: left;
+    width: fit-content;
+}
+
+.available-text p {
+    font-size: 18px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+/* Platform icons */
+.platform-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #333333;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px;
+    transition: all 0.2s ease;
+}
+
+.platform-icon:hover {
+    background-color: #555555;
+    transform: scale(1.05);
+}
+
+.platform-icon:active {
+    transform: scale(0.95);
+}
+
+.platform-icon-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 /* Search Results */
 .search-result {
-    padding: 24px;
-    border-radius: 12px;
-    margin-bottom: 16px;
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 24px;
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: left;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 32px;
 }
 
 .search-result:hover {
@@ -355,10 +454,10 @@ input[type="checkbox"] {
 }
 
 .search-result-poster {
-    width: 60px;
-    height: 86px;
+    width: 80px;
+    height: 114px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 12px;
     flex-shrink: 0;
 }
 
@@ -367,12 +466,12 @@ input[type="checkbox"] {
 }
 
 .search-result-title {
-    font-size: 24px;
-    margin-bottom: 8px;
+    font-size: 28px;
+    margin-bottom: 12px;
 }
 
 .search-result-year {
-    font-size: 18px;
+    font-size: 20px;
     color: #AAAAAA;
 }
 
@@ -408,17 +507,15 @@ input[type="checkbox"] {
 
 /* Unavailable Section */
 .unavailable-section {
-    text-align: center;
-    margin-bottom: 32px;
+    display: none;
 }
 
-.action-section {
-    margin-top: 24px;
-}
-
-.action-section p {
-    font-size: 20px;
-    margin-bottom: 8px;
+/* Unavailable page buttons */
+.unavailable-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 /* Loading States */
@@ -444,47 +541,51 @@ input[type="checkbox"] {
 
 /* Confirmation Page */
 .what-happens-next {
-    text-align: left;
-    max-width: 600px;
+    text-align: center;
+    max-width: 900px;
     margin: 32px auto;
 }
 
+.confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.what-happens-next h3 {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
 .what-happens-next ul {
-    list-style-position: inside;
+    list-style: none;
     margin-left: 0;
+    padding-left: 0;
 }
 
 .what-happens-next li {
     font-size: 18px;
     margin-bottom: 12px;
     line-height: 1.5;
+    text-align: center;
 }
 
 .request-summary {
     text-align: left;
-    max-width: 800px;
-    margin: 32px auto;
+    max-width: 900px;
+    margin: 16px auto 32px auto;
     padding: 32px;
     background-color: #111111;
     border-radius: 12px;
 }
 
-.summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+#summary-content p {
     font-size: 18px;
-}
-
-.summary-label {
-    font-weight: normal;
-    color: #AAAAAA;
-}
-
-.summary-value {
-    font-weight: normal;
-    text-align: right;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    text-align: left;
 }
 
 /* Error Messages */
